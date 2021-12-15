@@ -83,8 +83,8 @@ export default function MainApp({ location }: Data) {
 }
 
 export async function getServerSideProps() {
-    let { data: geoData } = await axios.get(process.env.GET_LOCATION!)
-    let { data: location } = await axios.get<Location>(`${process.env.WEATHER_DOMAIN}/json/?lang=en/forecast/daily?lat=${geoData.lat}&lon=${geoData.lon}&lang=ru&key=${process.env.WEATHER_KEY}`)
+    let { data: geoData } = await axios.get(`${process.env.GET_LOCATION}/json`)
+    let { data: location } = await axios.get<Location>(`${process.env.WEATHER_DOMAIN}/v2.0/forecast/daily?lang=ru&lat=${geoData.lat}&lon=${geoData.lon}&key=${process.env.WEATHER_KEY}`)
 
     return {
         props: { location }
